@@ -1,4 +1,5 @@
 from django.apps import AppConfig
+import requests
 
 class BostonConstructionConfig(AppConfig):
     default_auto_field = "django.db.models.BigAutoField"
@@ -9,14 +10,12 @@ class BostonConstructionConfig(AppConfig):
         Django runs this code on app startup (allegedly)
         """
         # TODO is there a more generic way to refer to this, so that it's the one updated daily?
-        offset = 0
-        response = requests.get(f"https://data.boston.gov/api/3/action/datastore_search?offset={offset}&resource_id=36fcf981-e414-4891-93ea-f5905cec46fc")
-        data_txt = response.text # TODO do we need to index a particular json point?
-        data = response.json()["result"]["records"]
-        while response.status_code == 200:
-            offset += 100 #loltacular code
-            response = requests.get(f"https://data.boston.gov/api/3/action/datastore_search?offset={offset}&resource_id=36fcf981-e414-4891-93ea-f5905cec46fc")
-            data_txt += response.text
-            data += response.json()["results"]["records"]
-
-        # TODO get data
+        response = requests.get(f"https://data.boston.gov/api/3/action/datastore_search?offset=0&resource_id=36fcf981-e414-4891-93ea-f5905cec46fc")
+        data_json = response.json()
+        total = data_json["result"]["total"]
+        print(f"Total is {total}")
+        records = []
+        while len(records) != total:
+            response = requests.get(f"https://data.boston.gov/api/3/action/datastore_search?offset={len(records)}&resource_id=36fcf981-e414-4891-93ea-f5905cec46fc")
+            records += response.json()["result"]["records"]
+            print(f"Got {len(records)} objects")
