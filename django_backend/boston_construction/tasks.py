@@ -48,3 +48,16 @@ def get_data():
                 trench_length=record['Trench_Length'], contact_number=record['Contact_Number'], number_of_works=record['NumberOfWorkZones'],
                 district=record['District'], lat=0.0, _long=0.0)
         work.save()
+
+        # gets their location
+        address = str(work.address_1)
+        street = str(work.street)
+        street = street.split()
+        for word in street:
+            address = address + "+" + word
+        url = f"https://nominatim.openstreetmap.org/search?q={address}+boston&format=geojson"
+        response = requests.get(url)
+        data = response.json()
+        work.long = data["features"][0]["geometry"]["coordinates"][1]
+        work.lat = data["features"][0]["geometry"]["coordinates"][0]
+        work.save()
