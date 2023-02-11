@@ -35,7 +35,7 @@ def get_data(request):
                 work_schedule=record['Work_Schedule'], expiration_date=record['ExpirationDate'], estimated_completion_date=record['Estimated_Completion_Date'],
                 roadway_plates_in_use=record['Roadway_Plates_In_Use'], sidewalk_plates_in_use=record['Sidewalk_Plates_In_Use'], status=record['Status'],
                 trench_length=record['Trench_Length'], contact_number=record['Contact_Number'], number_of_works=record['NumberOfWorkZones'],
-                district=record['District'], latitude=0.0, longitude=0.0)
+                                  district=record['District'], latitude=None, longitude=None)
         work.save()
 
         # gets their location
@@ -47,6 +47,9 @@ def get_data(request):
         url = f"https://nominatim.openstreetmap.org/search?q={address}+boston&format=geojson"
         response = requests.get(url)
         data = response.json()
-        work.longitude = data["features"][0]["geometry"]["coordinates"][1]
-        work.lat = data["features"][0]["geometry"]["coordinates"][0]
+        try:
+            work.longitude = data["features"][0]["geometry"]["coordinates"][1]
+            work.lat = data["features"][0]["geometry"]["coordinates"][0]
+        except IndexError:
+            continue
         work.save()
