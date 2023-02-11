@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 
 
 # Create your models here.
@@ -34,3 +35,11 @@ class ConstructionRecord(models.Model):
     lat = models.FloatField()
     long = models.FloatField()
     #location = models.PointField(default=Point()) # "initializes the location" "Point(42.32505498309912, -71.07532782322932)"
+
+class MailingListRecord(models.Model):
+    email = models.CharField(max_length=200)
+    zip_code = models.CharField(max_length=20)
+    secret = models.CharField(max_length=64) # a secret parameter, so only the user can unsubscribe themselves.
+
+    def get_absolute_url(self):
+        return reverse('author-detail', kwargs={'pk': self.pk})
