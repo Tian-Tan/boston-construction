@@ -7,7 +7,7 @@ class BostonConstructionConfig(AppConfig):
 
     def ready(self):
         """
-        Django runs this code on app startup (allegedly)
+        Django runs this code on app startup
         """
         # TODO is there a more generic way to refer to this, so that it's the one updated daily?
         response = requests.get(f"https://data.boston.gov/api/3/action/datastore_search?offset=0&resource_id=36fcf981-e414-4891-93ea-f5905cec46fc")
