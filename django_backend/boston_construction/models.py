@@ -32,8 +32,8 @@ class ConstructionRecord(models.Model):
     number_of_works = models.IntegerField() #"1"
     district = models.CharField(max_length=200) # "10B"
     #location = models.PointField(default=Point()) # "initializes the location" "Point(42.32505498309912, -71.07532782322932)"
-    lat = models.FloatField()
-    long = models.FloatField()
+    latitude = models.FloatField()
+    longitude = models.FloatField()
     #location = models.PointField(default=Point()) # "initializes the location" "Point(42.32505498309912, -71.07532782322932)"
 
 class MailingListRecord(models.Model):
