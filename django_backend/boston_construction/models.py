@@ -1,4 +1,4 @@
-from django.contrib.gis.db import models, Point
+from django.db import models
 
 
 # Create your models here.
@@ -30,4 +30,7 @@ class ConstructionRecord(models.Model):
     contact_number = models.CharField(max_length=200) #"800-446-8946"
     number_of_works = models.IntegerField() #"1"
     district = models.CharField(max_length=200) # "10B"
-    location = models.PointField(default=Point()) # "initializes the location" "Point(42.32505498309912, -71.07532782322932)"
+    #location = models.PointField(default=Point()) # "initializes the location" "Point(42.32505498309912, -71.07532782322932)"
+    lat = models.FloatField()
+    long = models.FloatField()
+    #location = models.PointField(default=Point()) # "initializes the location" "Point(42.32505498309912, -71.07532782322932)"
