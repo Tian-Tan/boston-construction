@@ -1,4 +1,5 @@
 from django.apps import AppConfig
+from django_q.models import Schedule
 import requests
 
 class BostonConstructionConfig(AppConfig):
@@ -9,6 +10,9 @@ class BostonConstructionConfig(AppConfig):
         """
         Django runs this code on app startup
         """
+
+        # Sets a task runner schedule!!
+
         # TODO is there a more generic way to refer to this, so that it's the one updated daily?
         response = requests.get(f"https://data.boston.gov/api/3/action/datastore_search?offset=0&resource_id=36fcf981-e414-4891-93ea-f5905cec46fc")
         data_json = response.json()
