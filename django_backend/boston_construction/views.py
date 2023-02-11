@@ -1,14 +1,19 @@
 from django.shortcuts import render, loader
 from django.http import HttpResponse
-from django.urls import reverse_lazy
+from django.core import serializers
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from boston_construction.models import MailingListRecord, ConstructionRecord
+from django.utils.safestring import SafeString
 import requests
 
 
 def index(request):
+    works = ConstructionRecord.objects.exclude(latitude__isnull=True).exclude(longitude__isnull=True)
+    works_json = serializers.serialize('json', works)
     template = loader.get_template('index.html')
-    context = {}
+    context = {
+        'worklist': SafeString(works_json),
+    }
     return HttpResponse(template.render(context, request))
 
 class MailingListRecordCreateView(CreateView):
@@ -17,15 +22,15 @@ class MailingListRecordCreateView(CreateView):
 
 def get_data(request):
     # TODO is there a more generic way to refer to this, so that it's the one updated daily?
-    response = requests.get(f"https://data.boston.gov/api/3/action/datastore_search?offset=0&resource_id=36fcf981-e414-4891-93ea-f5905cec46fc")
+    response = requests.get(f"https://data.boston.gov/api/3/action/datastore_search?offset=0&resource_id=36fcf981-e414-4891-93ea-f5905cec46fc&limit=50")
     data_json = response.json()
     total = data_json["result"]["total"]
     print(f"Total is {total}")
-    records = []
-    while len(records) != total:
-        response = requests.get(f"https://data.boston.gov/api/3/action/datastore_search?offset={len(records)}&resource_id=36fcf981-e414-4891-93ea-f5905cec46fc")
-        records += response.json()["result"]["records"]
-        print(f"Got {len(records)} objects")
+    records = data_json["result"]["records"]
+    # while len(records) != total:
+    #     response = requests.get(f"https://data.boston.gov/api/3/action/datastore_search?offset={len(records)}&resource_id=36fcf981-e414-4891-93ea-f5905cec46fc")
+    #     records += response.json()["result"]["records"]
+    #     print(f"Got {len(records)} objects")
 
     # Creates models for every record, gets their location, and save them into the database
     for record in records:
@@ -48,8 +53,10 @@ def get_data(request):
         response = requests.get(url)
         data = response.json()
         try:
-            work.longitude = data["features"][0]["geometry"]["coordinates"][1]
-            work.lat = data["features"][0]["geometry"]["coordinates"][0]
+            work.longitude = data["features"][0]["geometry"]["coordinates"][0]
+            work.latitude = data["features"][0]["geometry"]["coordinates"][1]
         except IndexError:
             continue
         work.save()
+
+    print("Done updating db")
