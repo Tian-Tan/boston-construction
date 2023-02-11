@@ -1,0 +1,10 @@
+./manage.py shell
+from django_q.models import Schedule
+Schedule.objects.create(
+    func='discounts.tasks.delete_expired_discounts',
+    minutes=1,
+    repeats=-1
+)
+
+
+./manage.py qcluster

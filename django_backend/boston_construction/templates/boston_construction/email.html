@@ -1,0 +1,8 @@
+<strong>Good day</strong>
+
+As of today, the following construction is ongoing in your area
+<ul>
+    {% for project in construction %}
+    <li>{{ project.contractor }}</li>
+    {% endfor %}
+</ul>
