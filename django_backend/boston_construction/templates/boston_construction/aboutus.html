@@ -1,13 +1,21 @@
 <html>
+  
+
   <head>
-    <title>About Us</title>
+    <title>BPWorks | About Us</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand&family=Roboto+Slab:wght@500&display=swap" rel="stylesheet"> 
     <style>
       body {
-        background-color: lightblue;
+        /* background-color: lightblue; */
+        background-image: url("https://i.postimg.cc/c4BB6zjR/20210903-193040.jpg");
+        background-size: 100% auto;
         display: flex;
         align-items: center;
         justify-content: center;
         height: 100vh;
+        margin-top: 200px;
       }
       .overlay {
         background-color: white;
@@ -24,15 +32,54 @@
         max-width: 600px;
         margin: 20px auto;
         word-wrap: break-word;
+        font-family: 'Quicksand', sans-serif;
       }
       h1 {
         text-align: center;
         margin-bottom: 40px;
         font-size: 32px;
+        font-family: 'Roboto Slab', serif;
       }
+      
+      nav {
+        background-color: lightblue;
+        padding: 0px;
+        text-align: center;
+        position:fixed;
+        top: 0px;
+      }
+  
+      nav ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+     }
+  
+      nav li {
+        display: inline-block;
+        float: left;
+        margin-right: 50px;
+        margin-left: 50px;
+      }
+      
+      nav a {
+        color: white;
+        text-decoration: none;
+        font-size: 20px;
+        font-family: sans-serif;
+      }
+
     </style>
   </head>
   <body>
+    <nav>
+      <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#mailing-list">Mailing List</a></li>
+        <li><a href="#about">About</a></li>
+      </ul>
+    </nav>
     <div class="overlay">
       <h1>About Us</h1>
       <p>Boston Public Works, or BPWorks for short, is a new and innovative project aimed at providing the people of Boston with daily updates on construction projects happening in their neighborhood and throughout the city. Our mission is to keep the community informed and aware of any changes that may impact their daily lives, whether it's traffic detours, sidewalk closures, or roadblocks. Users can look at our map feature to see the projects closest to them, and you can hover over the location pins in order to see what days construction takes place and a contact for each project for questions over the phone.</p>
