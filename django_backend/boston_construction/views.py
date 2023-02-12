@@ -20,12 +20,17 @@ headers = {
 }
 
 def index(request):
-    works = ConstructionRecord.objects.exclude(latitude__isnull=True).exclude(longitude__isnull=True)
+    works = ConstructionRecord.objects.exclude(latitude__isnull=True).exclude(longitude__isnull=True).filter(expiration_date__gt=timezone.now())
     works_json = serializers.serialize('json', works)
     template = loader.get_template('index.html')
     context = {
         'worklist': SafeString(works_json),
     }
+    return HttpResponse(template.render(context, request))
+
+def aboutus(request):
+    template = loader.get_template('boston_construction/aboutus.html')
+    context = {}
     return HttpResponse(template.render(context, request))
 
 class MailingListRecordCreateView(CreateView, SuccessMessageMixin):

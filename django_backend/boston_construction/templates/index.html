@@ -6,9 +6,12 @@
         <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
         <link href="https://api.mapbox.com/mapbox-gl-js/v2.12.0/mapbox-gl.css" rel="stylesheet">
         <script src="https://api.mapbox.com/mapbox-gl-js/v2.12.0/mapbox-gl.js"></script>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Quicksand&family=Roboto+Slab:wght@500&display=swap" rel="stylesheet"> 
         <style>
             body { margin: 0; padding: 0; }
-            #map { position: absolute; top: 0; bottom: 0; width: 100%; }
+            #map { position: absolute; top: 0; bottom: 0; width: 100%; z-index: 1;}
             .mapboxgl-popup-content {
                 border: solid;
                 border-radius: 25px;
@@ -27,9 +30,54 @@
                 margin-right: 5px;
                 width: 165px;
             }
+            nav {
+                padding: 0px;
+                position:fixed;
+                top: 10px;
+                width: 100%;
+                z-index: 2;
+            }
+        
+            nav ul {
+                list-style-type: none;
+                margin: 0;
+                padding: 0;
+                overflow: hidden;
+            }
+        
+            nav li {
+                display: inline;
+                margin-right: 10px;
+                margin-left: 10px;
+                float: left;
+            }
+            
+            nav a {
+                color: black;
+                display: block;
+                text-decoration: none;
+                font-size: 20px;
+                background-color: rgba(255, 255, 255, 0.7);
+                font-family: 'Roboto Slab', serif;
+                text-align: center;
+                padding: 18px 20px;
+                border: solid;
+                border-radius: 20px;
+            }
+
+            li a:hover {
+                background-color: rgba(171, 255, 156, 0.8);
+            }
         </style>
     </head>
     <body>
+        <nav>
+            <ul>
+              <li><a href="/app">Home</a></li>
+              <li><a href="/app/about">About</a></li>
+              <li style="float:right"><a href="/app/mailing-list">Mailing List</a></li>
+            </ul>
+        </nav>
         <div id="map"></div>
         <script>
             mapboxgl.accessToken = 'pk.eyJ1IjoibGVvbmlkYmVseWFldiIsImEiOiJjbGUwaXdrYW0wOWo2M3BxazF3a2dwOGdmIn0.JZtNbzg7TF8xX1l7UNOREg';
