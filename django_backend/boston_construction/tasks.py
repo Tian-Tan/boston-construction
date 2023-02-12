@@ -1,6 +1,5 @@
 import requests
 from .models import MailingListRecord, ConstructionRecord
-from django.shortcuts import render, loader
 from django.template.loader import render_to_string
 import django
 
