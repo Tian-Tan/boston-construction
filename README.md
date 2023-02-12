@@ -1,8 +1,12 @@
 # boston-construction
 A hackbeanpot 2023 project
 
-To run from a git clone, execute ./update.sh.
+First, download requirements for the project using `pip install -r requirements.txt`.
+
+To run from a fresh git clone, execute ./update.sh.
+
 Populate the database by accessing http://127.0.0.1:8000/get-data in a web browser.
+
 Send the emails by accessing http://127.0.0.1:8000/mailing-list/activate in a web browser.
 
 
