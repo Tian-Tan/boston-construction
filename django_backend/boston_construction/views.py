@@ -25,9 +25,13 @@ class MailingListRecordCreateView(CreateView, SuccessMessageMixin):
     success_url = "http://127.0.0.1:8000/app/mailing-list"
     success_message = "Succesfully signed up!"
 
+    def form_invalid(self, form):
+        return self.render_to_response({"message": "Failed to sign up! Are you already signed up?"})
+
     def form_valid(self, form):
         form.instance.secret = ''.join(random.choices(string.ascii_uppercase + string.digits, k=64))
-        return super(MailingListRecordCreateView, self).form_valid(form)
+        self.object = form.save()
+        return self.render_to_response({"message": "Successfully signed up!"})
 
 def delete_email(request, secret):
     record = get_object_or_404(MailingListRecord, secret=secret)
