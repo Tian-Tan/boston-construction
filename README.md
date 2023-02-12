@@ -3,7 +3,7 @@ A hackbeanpot 2023 project
 
 First, download requirements for the project using `pip install -r requirements.txt`.
 
-To run from a fresh git clone, execute ./update.sh.
+To run from a fresh git clone, execute .django_backend/update.sh.
 
 It will ask you to create an admin panel account - something basic is fine, you can leave email blank.
 
