@@ -5,6 +5,8 @@ First, download requirements for the project using `pip install -r requirements.
 
 To run from a fresh git clone, execute ./update.sh.
 
+It will ask you to create an admin panel account - something basic is fine, you can leave email blank.
+
 Populate the database by accessing http://127.0.0.1:8000/get-data in a web browser.
 
 Send the emails by accessing http://127.0.0.1:8000/mailing-list/activate in a web browser.
