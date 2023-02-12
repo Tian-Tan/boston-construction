@@ -122,9 +122,10 @@
       </ul>
     </nav>
     <h1>BPWorks</h1>
-    <h2>Subscribe to receive emails and updates about construction projects near you, to help you plan your routes accordingly around possible road closings.</h2>
     {% if message %}
     <strong>{{ message }}</strong>
+    {% else %}
+    <h2>Subscribe to receive emails and updates about construction projects near you, to help you plan your routes accordingly around possible road closings.</h2>
     {% endif %}
     <form method="post">{% csrf_token %}
       <p>Enter your email address:</p>
