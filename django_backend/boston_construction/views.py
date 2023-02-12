@@ -50,7 +50,7 @@ class MailingListRecordCreateView(CreateView, SuccessMessageMixin):
 def delete_email(request, secret):
     record = get_object_or_404(MailingListRecord, secret=secret)
     record.delete()
-    return render(request, "boston_construction/deleted_email.html", {"email": record.email})
+    return render(request, "boston_construction/mailinglistrecord_form.html", {"message": "Succesfully unsubcribed."})
 
 def send_email(request):
     """
@@ -60,7 +60,7 @@ def send_email(request):
     for mail_record in mail_records:
         construction = ConstructionRecord.objects.filter(zip_code=mail_record.zip_code).filter(expiration_date__gt=timezone.now()).values()
         print(construction)
-        email_body = render_to_string("boston_construction/email.html", {"construction": construction})
+        email_body = render_to_string("boston_construction/email.html", {"construction": construction, "unsub_secret": mail_record.secret})
         data = {
             "From": "belyaev.l@northeastern.edu",
             "To": f"{mail_record.email}",

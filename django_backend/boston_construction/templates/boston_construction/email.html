@@ -27,15 +27,15 @@ As of today, the following construction is ongoing in your area:
     {% else %}
     <li>Contact: None provided</li>
     {% endif %}
-    {% if project.address_1 and project.street }
+    {% if project.address_1 and project.street %}
     <li>Address: {{ project.address_1 }} {{ project.street }}</li>
     {% else %}
     <li>Address: None provided</li>
     {% endif %}
-{% if construction|length > 1%}
-<p>
-Additionally,
-</p>
-{% endif %}
+    <br/>
 {% endfor %}
 </ul>
+
+<p>
+    To unsubscribe, click <a href="http://127.0.0.1:8000/mailing-list/unsubscribe/{{ unsub_secret }}">here.</a>
+</p>
