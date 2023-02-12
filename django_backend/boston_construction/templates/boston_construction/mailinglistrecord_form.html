@@ -73,9 +73,52 @@
         font-size: 18px;
         font-family: 'Quicksand', sans-serif;
       }
+
+      nav {
+        background-color: rgb(204, 220, 242);
+        padding: 0px;
+        position:fixed;
+        top: 0px;
+        width: 100%;
+      }
+  
+      nav ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+     }
+  
+      nav li {
+        display: inline;
+        margin-right: 10px;
+        margin-left: 10px;
+        float: left;
+      }
+      
+      nav a {
+        color: black;
+        display: block;
+        text-decoration: none;
+        font-size: 20px;
+        font-family: 'Roboto Slab', serif;
+        text-align: center;
+        padding: 18px 20px;
+      }
+
+      li a:hover {
+      background-color: rgb(232, 242, 245);
+      }
     </style>
   </head>
   <body>
+    <nav>
+      <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li style="float:right"><a href="#mailing-list">Mailing List</a></li>
+      </ul>
+    </nav>
     <h1>BPWorks</h1>
     <h2>Subscribe to receive emails and updates about construction projects near you, to help you plan your routes accordingly around possible road closings.</h2>
     {% if message %}

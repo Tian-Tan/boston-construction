@@ -9,13 +9,13 @@
     <style>
       body {
         /* background-color: lightblue; */
-        background-image: url("https://i.postimg.cc/c4BB6zjR/20210903-193040.jpg");
+        background-image: url("https://i.postimg.cc/7Z4tW0vV/20211010-222612.jpg");
         background-size: 100% auto;
         display: flex;
         align-items: center;
         justify-content: center;
         height: 100vh;
-        margin-top: 200px;
+        margin-top: 250px;
       }
       .overlay {
         background-color: white;
@@ -42,11 +42,11 @@
       }
       
       nav {
-        background-color: lightblue;
+        background-color: rgb(204, 220, 242);
         padding: 0px;
-        text-align: center;
         position:fixed;
         top: 0px;
+        width: 100%;
       }
   
       nav ul {
@@ -57,17 +57,24 @@
      }
   
       nav li {
-        display: inline-block;
+        display: inline;
+        margin-right: 10px;
+        margin-left: 10px;
         float: left;
-        margin-right: 50px;
-        margin-left: 50px;
       }
       
       nav a {
-        color: white;
+        color: black;
+        display: block;
         text-decoration: none;
         font-size: 20px;
-        font-family: sans-serif;
+        font-family: 'Roboto Slab', serif;
+        text-align: center;
+        padding: 18px 20px;
+      }
+
+      li a:hover {
+      background-color: rgb(232, 242, 245);
       }
 
     </style>
@@ -76,8 +83,8 @@
     <nav>
       <ul>
         <li><a href="#home">Home</a></li>
-        <li><a href="#mailing-list">Mailing List</a></li>
         <li><a href="#about">About</a></li>
+        <li style="float:right"><a href="#mailing-list">Mailing List</a></li>
       </ul>
     </nav>
     <div class="overlay">
