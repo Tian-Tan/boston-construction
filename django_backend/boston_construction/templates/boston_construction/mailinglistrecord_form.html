@@ -30,6 +30,13 @@
         width: 400px;
       }
 
+      input[type="text"] {
+        padding: 10px;
+        margin-bottom: 20px;
+        font-size: 16px;
+        width: 400px;
+      }
+
       input[type="submit"] {
         padding: 10px 20px;
         background-color: red;
@@ -57,9 +64,18 @@
   <body>
     <h1>BPWorks</h1>
     <h2>Subscribe to receive emails and updates about construction projects near you, to help you plan your routes accordingly around possible road closings.</h2>
-    <form>
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    <form method="post">{% csrf_token %}
       <p>Enter your email address:</p>
-      <input type="email" required>
+      <input id="email" type="email" name="email" required>
+      <p>Enter your zip code:</p>
+      <input id="zip_code" type="text" name="zip_code" required>
       <input type="submit" value="Subscribe">
     </form>
   </body>

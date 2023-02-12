@@ -37,9 +37,6 @@ class ConstructionRecord(models.Model):
     #location = models.PointField(default=Point()) # "initializes the location" "Point(42.32505498309912, -71.07532782322932)"
 
 class MailingListRecord(models.Model):
-    email = models.CharField(max_length=200)
+    email = models.CharField(max_length=200, unique=True)
     zip_code = models.CharField(max_length=20)
-    secret = models.CharField(max_length=64) # a secret parameter, so only the user can unsubscribe themselves.
-
-    def get_absolute_url(self):
-        return reverse('author-detail', kwargs={'pk': self.pk})
+    secret = models.CharField(max_length=64, blank=True) # a secret parameter, so only the user can unsubscribe themselves.

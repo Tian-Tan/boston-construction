@@ -1,10 +1,13 @@
-from django.shortcuts import render, loader
+from django.shortcuts import render, loader, get_object_or_404
 from django.http import HttpResponse
 from django.core import serializers
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from boston_construction.models import MailingListRecord, ConstructionRecord
 from django.utils.safestring import SafeString
 import requests
+import string
+import random
+from django.contrib.messages.views import SuccessMessageMixin
 
 
 def index(request):
@@ -16,9 +19,20 @@ def index(request):
     }
     return HttpResponse(template.render(context, request))
 
-class MailingListRecordCreateView(CreateView):
+class MailingListRecordCreateView(CreateView, SuccessMessageMixin):
     model = MailingListRecord
     fields = ["email", "zip_code"]
+    success_url = "http://127.0.0.1:8000/app/mailing-list"
+    success_message = "Succesfully signed up!"
+
+    def form_valid(self, form):
+        form.instance.secret = ''.join(random.choices(string.ascii_uppercase + string.digits, k=64))
+        return super(MailingListRecordCreateView, self).form_valid(form)
+
+def delete_email(request, secret):
+    record = get_object_or_404(MailingListRecord, secret=secret)
+    record.delete()
+    return render(request, "boston_construction/deleted_email.html", {"email": record.email})
 
 def get_data(request):
     # TODO is there a more generic way to refer to this, so that it's the one updated daily?
