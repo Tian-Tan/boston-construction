@@ -1,8 +1,41 @@
-<strong>Good day</strong>
+<strong>Good day.</strong>
 
-As of today, the following construction is ongoing in your area
+<p>
+You are receiving this email because you signed up for the BPWorks mailing list.
+</p>
+
+<p>
+As of today, the following construction is ongoing in your area:
+</p>
+
 <ul>
-    {% for project in construction %}
-    <li>{{ project.contractor }}</li>
-    {% endfor %}
+{% for project in construction %}
+    {% if project.construction_notes %}
+    <li>Description: {{ project.construction_notes }}</li>
+    {% elif project.category %}
+    <li>Description: {{ project.category }}</li>
+    {% else %}
+    <li>Description: None provided</li>
+    {% endif %}
+    {% if project.contractor %}
+    <li>Contractor: {{ project.contractor }}</li>
+    {% else %}
+    <li>Contractor: None provided</li>
+    {% endif %}
+    {% if project.contact_number %}
+    <li>Contact: {{ project.contact_number }}</li>
+    {% else %}
+    <li>Contact: None provided</li>
+    {% endif %}
+    {% if project.address_1 and project.street }
+    <li>Address: {{ project.address_1 }} {{ project.street }}</li>
+    {% else %}
+    <li>Address: None provided</li>
+    {% endif %}
+{% if construction|length > 1%}
+<p>
+Additionally,
+</p>
+{% endif %}
+{% endfor %}
 </ul>

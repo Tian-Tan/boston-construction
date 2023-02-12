@@ -22,8 +22,11 @@ class ConstructionRecord(models.Model):
     project_category = models.CharField(max_length=200, blank=True, null=True) #"NEW CONDUIT AND/OR MAIN"
     construction_notes = models.CharField(max_length=200, blank=True, null=True) #"INSTALLATION OF SEWER AND DRAIN MAINS"
     work_schedule = models.CharField(max_length=200, blank=True, null=True) #"Days & Weekends"
-    expiration_date = models.CharField(max_length=200, blank=True, null=True) #"2023-03-03 00:00:00"
-    estimated_completion_date = models.CharField(max_length=200, blank=True, null=True) #"2023-03-03 00:00:00"
+
+    expiration_date = models.DateTimeField(blank=True, null=True) #"2023-03-03 00:00:00"
+    estimated_completion_date = models.DateTimeField(blank=True, null=True) #"2023-03-03 00:00:00"
+
+
     roadway_plates_in_use = models.IntegerField(blank=True, null=True) #"None" or "2"
     sidewalk_plates_in_use = models.IntegerField(blank=True, null=True) #"None" or "2"
     status = models.CharField(max_length=200, blank=True, null=True) #"STATUS"
@@ -34,6 +37,7 @@ class ConstructionRecord(models.Model):
     #location = models.PointField(default=Point()) # "initializes the location" "Point(42.32505498309912, -71.07532782322932)"
     latitude = models.FloatField(blank=True, null=True)
     longitude = models.FloatField(blank=True, null=True)
+    zip_code = models.CharField(max_length=100, blank=True, null=True)
     #location = models.PointField(default=Point()) # "initializes the location" "Point(42.32505498309912, -71.07532782322932)"
 
 class MailingListRecord(models.Model):
