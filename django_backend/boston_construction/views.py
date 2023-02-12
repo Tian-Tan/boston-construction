@@ -64,7 +64,7 @@ def send_email(request):
         data = {
             "From": "belyaev.l@northeastern.edu",
             "To": f"{mail_record.email}",
-            "Subject": "Daily BCWerk Notification",
+            "Subject": "Daily BPWorks Notification",
             "HtmlBody": email_body,
             "MessageStream": "outbound"
         }
