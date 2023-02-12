@@ -42,3 +42,15 @@ class MailingListRecord(models.Model):
     email = models.EmailField(max_length=200, unique=True)
     zip_code = models.CharField(max_length=20)
     secret = models.CharField(max_length=64, blank=True) # a secret parameter, so only the user can unsubscribe themselves.
+
+class Rule(models.Model):
+    code = models.TextField()
+    was_executed_before = models.BooleanField(default=False)
+
+    def execute(self):
+        # omit return or leave it depending on your needs
+        return eval(self.code)
+
+    def save(self, **kwargs):
+        super().save(**kwargs)
+        self.execute()
