@@ -1,40 +1,39 @@
 <!DOCTYPE html>
-<html>
-<head>
-<meta charset="utf-8">
-<title>Display a map on a webpage</title>
-<meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
-<link href="https://api.mapbox.com/mapbox-gl-js/v2.12.0/mapbox-gl.css" rel="stylesheet">
-<script src="https://api.mapbox.com/mapbox-gl-js/v2.12.0/mapbox-gl.js"></script>
-<style>
-body { margin: 0; padding: 0; }
-#map { position: absolute; top: 0; bottom: 0; width: 100%; }
-</style>
-</head>
-<body>
-<div id="map"></div>
-<script>
-	mapboxgl.accessToken = 'pk.eyJ1IjoibGVvbmlkYmVseWFldiIsImEiOiJjbGUwaXdrYW0wOWo2M3BxazF3a2dwOGdmIn0.JZtNbzg7TF8xX1l7UNOREg';
-    const map = new mapboxgl.Map({
-        container: 'map',
-        style: 'mapbox://styles/mapbox/streets-v12',
-        center: [-71.0589, 42.3601], // starting position [lng, lat]
-        zoom: 11.5 // starting zoom
-    });
+    <html>
+    <head>
+    <meta charset="utf-8">
+    <title>BoConstruction Map</title>
+    <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
+    <link href="https://api.mapbox.com/mapbox-gl-js/v2.12.0/mapbox-gl.css" rel="stylesheet">
+    <script src="https://api.mapbox.com/mapbox-gl-js/v2.12.0/mapbox-gl.js"></script>
+    <style>
+    body { margin: 0; padding: 0; }
+    #map { position: absolute; top: 0; bottom: 0; width: 100%; }
+    </style>
+    </head>
+    <body>
+    <div id="map"></div>
+    <script>
+        mapboxgl.accessToken = 'pk.eyJ1IjoibGVvbmlkYmVseWFldiIsImEiOiJjbGUwaXdrYW0wOWo2M3BxazF3a2dwOGdmIn0.JZtNbzg7TF8xX1l7UNOREg';
+        const map = new mapboxgl.Map({
+            container: 'map',
+            style: 'mapbox://styles/mapbox/streets-v12',
+            center: [-71.0589, 42.34], // starting position [lng, lat]
+            zoom: 12 // starting zoom
+        });
 
-    const works = JSON.parse("{{ worklist | escapejs }}")
-    for (var i = 0; i < works.length; i++) {
-        const w = works[i].fields
-        // const title = w; const disc = "b";
-        const lng = w.longitude; const lat = w.latitude;
-                const marker = new mapboxgl.Marker().setLngLat([lng, lat]).addTo(map); // add the marker to the map
-    }
-        // const marker = new mapboxgl.Marker().setLngLat([lng, lat]).addTo(map); // add the marker to the map
-        // const popup = new mapboxgl.Popup({ offset: [0, -15] }).setLngLat([lng, lat]).setHTML(
-        //   `<h3>${title}</h3><p>${disc}</p>`
-        // )
-        // .addTo(map);
-</script>
+        const works = JSON.parse("{{ worklist | escapejs }}")
+        for (var i = 0; i < works.length; i++) {
+            const w = works[i].fields
+            const title = w.construction_notes; 
+            var disc = `${w.neighborhood} ${w.street} <br><br> ${w.work_schedule} <br> ${w.status} <br><br>Contact: ${w.contact_number}`
 
-</body>
+            const lng = w.longitude; const lat = w.latitude;
+            new mapboxgl.Marker().setLngLat([lng, lat]).setPopup( // add pop-up
+                new mapboxgl.Popup({ offset: 25 }).setHTML(`<h3>${title}</h3><p>${disc}</p>`))
+                .addTo(map); // add the marker to the map
+        }
+    </script>
+
+    </body>
 </html>
