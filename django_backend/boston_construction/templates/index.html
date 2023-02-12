@@ -13,8 +13,7 @@
                 border: solid;
                 border-radius: 25px;
                 border-color: black;
-                padding: 5px;
-                width: 200px;}
+                }
             .mapboxgl-popup-close-button {
                 margin: 10px;
                 border: solid; 
@@ -22,6 +21,11 @@
                 border-radius: 100px;}
             .card {
                 margin-right: 20px;
+            }
+            .title {
+                margin-top: 0px;
+                margin-right: 5px;
+                width: 165px;
             }
         </style>
     </head>
@@ -39,12 +43,29 @@
             const works = JSON.parse("{{ worklist | escapejs }}")
             for (var i = 0; i < works.length; i++) {
                 const w = works[i].fields
-                const title = w.construction_notes; 
-                var disc = `${w.neighborhood} ${w.street} <br><br> ${w.work_schedule} <br> ${w.status} <br><br>Contact: ${w.contact_number}`
+                var title = "MAINTENANCE";
+               
+                if(w.construction_notes !== null) {
+                    title = w.construction_notes
+                } else if(w.project_category !== null) {
+                    title = w.project_category
+                }
+
+                var disc = `${w.address_1} ${w.street} <br>Schedule: ${w.work_schedule}<br>`
+                if(w.status !== null) {
+                    disc += `<br>Status: ${w.status}<br>`
+                }
+
+                if(w.contractor !== null) {
+                    disc += `<br>Contractor: ${w.contractor}`
+                }
+                if(w.contact_number !== null) {
+                    disc += `<br>Contact: ${w.contact_number}`
+                }
 
                 const lng = w.longitude; const lat = w.latitude;
                 new mapboxgl.Marker().setLngLat([lng, lat]).setPopup( // add pop-up
-                    new mapboxgl.Popup({ offset: 25 }).setHTML(`<div class="card"><h3>${title}</h3><p>${disc}</p></div>`))
+                    new mapboxgl.Popup({ offset: 25 }).setHTML(`<div class="card"><h3 class="title">${title}</h3><p>${disc}</p></div>`))
                     .addTo(map); // add the marker to the map
             }
         </script>
