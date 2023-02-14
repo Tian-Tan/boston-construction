@@ -1,6 +1,8 @@
 # boston-construction
 A hackbeanpot 2023 project
 
+As of 2023-02-14, API keys are deactivated.
+
 First, download requirements for the project using `pip install -r requirements.txt`.
 
 To run from a fresh git clone, execute django_backend/update.sh.
