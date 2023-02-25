@@ -1,6 +1,11 @@
 # boston-construction
 A hackbeanpot 2023 project
 
+# devpost
+https://devpost.com/software/bpworks
+
+# notes
+
 As of 2023-02-14, API keys are deactivated.
 
 First, download requirements for the project using `pip install -r requirements.txt`.
@@ -13,7 +18,5 @@ Populate the public works database by accessing http://127.0.0.1:8000/get-data i
 
 Send the emails by accessing http://127.0.0.1:8000/mailing-list/activate in a web browser.
 
-
-# NOTES
 to run docker container and get host networking, use --net=host
 e.g. `podman build --net=host .`
