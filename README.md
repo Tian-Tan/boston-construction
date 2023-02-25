@@ -1,7 +1,8 @@
 # boston-construction
 A hackbeanpot 2023 project
 
-# devpost
+For a demo, see the devpost:
+
 https://devpost.com/software/bpworks
 
 # notes
